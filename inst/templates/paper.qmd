@@ -56,9 +56,9 @@ highlights: |
 
 <!-- With the following code you can access and display values from the yml header above. -->
 
-Keywords: `r rmarkdown::metadata$keywords`
+Keywords: {{< meta keywords >}}
 
-Highlights: `r rmarkdown::metadata$highlights`
+Highlights: {{< meta highlights >}}
 
 <!-- The actual document text starts here: -->
 
