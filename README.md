@@ -7,11 +7,11 @@
 
 ## Motivation
 
-The goal of **rrtools** is to provide instructions, templates, and functions for making a basic compendium suitable for writing a reproducible journal article or report with [R](https://www.r-project.org). This package documents the key steps and provides convenient functions for quickly creating a new research compendium. The approach is based generally on [Kitzes et al. (2017)](https://www.practicereproducibleresearch.org), and more specifically on [Marwick (2017)](https://doi.org/10.1007/s10816-015-9272-9), [Marwick et al. (2018)](https://doi.org/10.7287/peerj.preprints.3192v1), and [Wickham’s (2017)](https://docs.google.com/document/d/1LzZKS44y4OEJa4Azg5reGToNAZL0e0HSUwxamNY7E-Y/edit#) work using the R package structure as the basis for a research compendium.
+The goal of **rrtools** is to provide instructions, templates, and functions for making a basic compendium suitable for writing a reproducible journal article or report with [R](https://www.r-project.org). This package documents the key steps and provides convenient functions for quickly creating a new research compendium. The approach is based on [Marwick (2017)](https://doi.org/10.1007/s10816-015-9272-9), [Marwick et al. (2018)](https://doi.org/10.7287/peerj.preprints.3192v1), and [Wickham’s (2017)](https://docs.google.com/document/d/1LzZKS44y4OEJa4Azg5reGToNAZL0e0HSUwxamNY7E-Y/edit#) work using the R package structure as the basis for a research compendium.
 
-rrtools provides a template for doing scholarly writing in a literate programming environment using [Quarto](https://quarto.org/), an open-source scientific and technical publishing system. It also allows for isolation of your computational environment using [Docker](https://www.docker.com/what-docker), package versioning using [MRAN](https://mran.microsoft.com/documents/rro/reproducibility/), and continuous integration using [GitHub Actions](https://github.com/features/actions). It makes a convenient starting point for writing a journal article or report. If you're writing a PhD thesis, or a similar type of multi-chapter document, a better choice might the [huskydown package](https://github.com/benmarwick/huskydown) or other bookdown variants.
+rrtools provides a template for doing scholarly writing in a literate programming environment using [Quarto](https://quarto.org/), an open-source scientific and technical publishing system. It also allows for isolation of your computational environment using [Docker](https://www.docker.com/what-docker), package versioning using [renv](https://rstudio.github.io/renv/index.html), and continuous integration using [GitHub Actions](https://github.com/features/actions). It makes a convenient starting point for writing a journal article or report. 
 
-The functions in rrtools allow you to use R to easily follow the best practices outlined in several major scholarly publications on reproducible research. In addition to those cited above, [Wilson et al. (2017)](https://doi.org/10.1371/journal.pcbi.1005510), [Piccolo & Frampton (2016)](https://gigascience.biomedcentral.com/articles/10.1186/s13742-016-0135-4), [Stodden & Miguez (2014)](http://doi.org/10.5334/jors.ay) and rOpenSci (2017[a](http://ropensci.github.io/reproducibility-guide/), [b](https://github.com/ropensci/rrrpkg)) are important sources that have influenced our approach to this package.
+The functions in rrtools allow you to use R to easily follow the best practices outlined in several major scholarly publications on reproducible research. In addition to those cited above, [Wilson et al. (2017)](https://doi.org/10.1371/journal.pcbi.1005510), [Piccolo & Frampton (2016)](https://gigascience.biomedcentral.com/articles/10.1186/s13742-016-0135-4), [Stodden & Miguez (2014)](http://doi.org/10.5334/jors.ay) and [rOpenSci (2017](https://github.com/ropensci/rrrpkg)) are important sources that have influenced our approach to this package.
 
 ## Installation
 
@@ -26,14 +26,14 @@ devtools::install_github("benmarwick/rrtools")
 
 ## How to use
 
-To create a reproducible research compendium step-by-step using the rrtools approach, follow these detailed instructions. We use [RStudio](https://www.rstudio.com/products/rstudio/#Desktop), and recommend it, but is not required for these steps to work. We recommend copy-pasting these directly into your console, and editing the options before running. We don’t recommend saving these lines in a script in your project: they are meant to be once-off setup functions.
+To create a reproducible research compendium step-by-step using the rrtools approach, follow these detailed instructions. We use [RStudio](https://posit.co/products/open-source/rstudio/#Desktop), and recommend it, but is not required for these steps to work. We recommend copy-pasting these directly into your console, and editing the options before running. We don’t recommend saving these lines in a script in your project: they are meant to be once-off setup functions.
 
 #### 0\. Create a Git-managed directory linked to an online repository
 
   - It is possible to use rrtools without Git, but usually we want our research compendium to be managed by the version control software [Git](https://git-scm.com/). The free online book [Happy Git With R](http://happygitwithr.com) has details on how to do this. In brief, there are two methods to get started:
       + [New project on GitHub first, then download to RStudio](https://happygitwithr.com/new-github-first.html): Start on Github, Gitlab, or a similar web service, and create an empty repository called `pkgname` (you should use a different name, please follow the rules below) on that service. Then [clone](https://happygitwithr.com/new-github-first.html) that repository to have a local empty directory on your computer, called `pkgname`, that is linked to this remote repository. Please see our [wiki](https://github.com/benmarwick/rrtools/wiki/Create-a-new,-empty-research-compendium,-starting-with-an-empty-GitHub-repository) for a step-by-step walk-though of this method, illustrated with screenshots. 
-      + [New project in RStudio first, then connect to GitHub/GitLab](https://happygitwithr.com/existing-github-first.html): An alternative approach is to create a local, empty, directory called `pkgname` on your computer, and initialize it with Git (`git init`), then create a GitHub/GitLab repository and connect your local project to the remote repository.
-  - Whichever of those two methods that you choose, you continue by [staging, commiting an pushing](https://happygitwithr.com/git-basics.html) every future change in the repository with Git.
+      + [New project in RStudio first, then connect to GitHub/GitLab](https://happygitwithr.com/existing-github-last.html): An alternative approach is to create a local, empty, directory called `pkgname` on your computer, and initialize it with Git (`git init`), then create a GitHub/GitLab repository and connect your local project to the remote repository.
+  - Whichever of those two methods that you choose, you continue by [staging, commiting and pushing](https://happygitwithr.com/git-basics.html) every future change in the repository with Git.
   - Your `pkgname` must follow some rules for everything to work, it must: 
     + … contain only ASCII letters, numbers, and ‘.’
     + … have at least two characters
@@ -97,15 +97,8 @@ To create a reproducible research compendium step-by-step using the rrtools appr
     `rrtools::add_dependencies_to_description()` that will scan the qmd file, identify libraries used in there, and add them to the `DESCRIPTION` file.
   - this function has an `data_in_git =` argument, which is `TRUE` by default. If set to `FALSE` you will exclude files in the `data/` directory from being tracked by git and prevent them from appearing on GitHub. You should set `data_in_git = FALSE` if your data files are large (\>100 mb is the limit for GitHub) or you do not want to make the data files publicly accessible on GitHub.
       - To load your custom code in the `paper.qmd`, you have a few options. You can write all your R code in chunks in the qmd, that’s the simplest method. Or you can write R code in script files in `/R`, and include `devtools::load_all(".")` at the top of your `paper.qmd`. Or you can write functions in `/R` and use `library(pkgname)` at the top of your `paper.qmd`, or omit `library` and preface each function call with `pkgname::`. Up to you to choose whatever seems most natural to you.
-      
-#### 5\. `renv::init()`
 
-  - this initates tracking of the packages you use in your project using [renv](https://github.com/rstudio/renv). renv will discover the R packages used in your project, and install those packages into a private project library
-  - We can use `renv::snapshot()` to save the state of our project library from time to time, or at the end when we are ready to share. The project state will be saved into a file called renv.lock.
-  - Our collaborators can run `renv::restore()` to install exactly those packages into their own library.
-  - Don't skip this step because our Binder and Dockerfile use the renv.lock file to install the packages they need to run your code. So renv is an important component of making a compendium reproducible.
- 
-#### 6\. `rrtools::use_dockerfile()`
+#### 5\. `rrtools::use_dockerfile()`
 
   - this creates a basic Dockerfile using [`rocker/verse`](https://github.com/rocker-org/rocker) as the base image
   - this also creates creates a minimal `.yml` configuration file to activate continuous integration using GitHub Actions. This will attempt to render your qmd document, in a Docker container specified by your Dockerfile, each time you push to GitHub. You can view the results of each attempt at the 'actions' page for your compendium on github.com, e.g. https://github.com/benmarwick/rrtools/actions 
@@ -115,6 +108,14 @@ To create a reproducible research compendium step-by-step using the rrtools appr
       - edit the Dockerfile to add linux dependencies (for R packages that require additional libraries outside of R). You can find out what these are by browsing the [DESCRIPTION](DESCRIPTION) files of the other packages you’re using, and looking in the SystemRequirements field for each package. If you are getting build errors on GitHub Actions, check the logs. Often, the error messages will include the names of missing libraries.
       - modify which qmd files are rendered when the container is made
       - have a public GitHub repo to use the Dockerfile that this function generates. It is possible to keep the repository private and run a local Docker container with minor modifications to the Dockerfile that this function generates. 
+      
+#### 6\. `renv::init()`
+
+  - this initates tracking of the packages you use in your project using [renv](https://github.com/rstudio/renv). renv will discover the R packages used in your project, and install those packages into a private project library
+  - We can use `renv::snapshot()` to save the state of our project library from time to time, or at the end when we are ready to share. The project state will be saved into a file called renv.lock.
+  - Our collaborators can run `renv::restore()` to install exactly those packages into their own library.
+  - Don't skip this step because our Binder and Dockerfile use the renv.lock file to install the packages they need to run your code. So renv is an important component of making a compendium reproducible.
+ 
 
 You should be able to follow these steps to get a new research compendium repository ready to write in just a few minutes.
 
@@ -137,10 +138,6 @@ analytical work reproducibly using R (and friends).
 Piccolo, S. R. and M. B. Frampton (2016). “Tools and techniques for
 computational reproducibility.” GigaScience 5(1): 30.
 <https://gigascience.biomedcentral.com/articles/10.1186/s13742-016-0135-4>
-
-rOpenSci community (2017a). Reproducibility in Science A Guide to
-enhancing reproducibility in scientific results and writing. Online at
-<http://ropensci.github.io/reproducibility-guide/>
 
 rOpenSci community (2017b). rrrpkg: Use of an R package to facilitate
 reproducible research. Online at <https://github.com/ropensci/rrrpkg>
